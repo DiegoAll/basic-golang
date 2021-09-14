@@ -4,40 +4,33 @@ import "fmt"
 
 func main() {
 
-	//Area cuadrado
-	const baseCuadrado = 10
-	areaCuadrado := baseCuadrado * baseCuadrado
-	fmt.Println("Area cuadrado:", areaCuadrado)
+	//Funciones mas importantes del paquete fmt
 
-	x := 10
-	y := 50
+	//Declaración de variables
+	helloMessage := "Hello"
+	worldMessage := "world"
 
-	//suma
-	result := x + y
-	fmt.Println("Suma:", result)
+	//Println
+	fmt.Println(helloMessage, worldMessage)
+	fmt.Println(helloMessage, worldMessage)
 
-	//Resta
-	result = y - x
-	fmt.Println("Resta:", result)
+	// Printf
+	expresion := "Parcero"
+	cantidad := 500
+	fmt.Printf("%s por favor me da %d de cilantro\n", expresion, cantidad)
 
-	//Multiplicacion
-	result = x * y
-	fmt.Println("Multiplicación:", result)
+	//Cuando no se sabe el tipo de valor, la buena práctica es intentar asignar el tipo de dato al que pertenece
+	fmt.Printf("%v por favor me da %v de cilantro\n", expresion, cantidad)
 
-	//División
-	result = y / x
-	fmt.Println("División:", result)
+	//Sprintf va a generar un string pero no lo va a imprimir en consola pero lo va a guardar como un string
+	message := fmt.Sprintf("%v por favor me da %v de cilantro", expresion, cantidad)
+	fmt.Println(message)
 
-	//Modulo
-	result = y % x
-	fmt.Println("Mpodulo", result)
+	//Tipo de datos
+	fmt.Printf("helloMessage: %T\n", helloMessage)
 
-	//Incremental
-	x++
-	fmt.Println("Incremental", x)
+	fmt.Printf("Cantidad: %T\n", cantidad)
 
-	//Decremental
-	x--
-	fmt.Println("Decermental", x)
+	//Las anteriores son las funciones mas "importantes" o útiles del paquete fmt.
 
 }
