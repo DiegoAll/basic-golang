@@ -4,33 +4,51 @@ import "fmt"
 
 func main() {
 
-	//Funciones mas importantes del paquete fmt
+	//For condicional
+	fmt.Println("For condicional")
+	for i := 0; i < 10; i++ {
+		fmt.Println(i)
+	}
 
-	//Declaración de variables
-	helloMessage := "Hello"
-	worldMessage := "world"
+	fmt.Println()
 
-	//Println
-	fmt.Println(helloMessage, worldMessage)
-	fmt.Println(helloMessage, worldMessage)
+	//For while
+	fmt.Println("For while")
+	counter := 0
+	for counter < 10 {
+		fmt.Println(counter)
+		counter++
+	}
 
-	// Printf
-	expresion := "Parcero"
-	cantidad := 500
-	fmt.Printf("%s por favor me da %d de cilantro\n", expresion, cantidad)
+	fmt.Println()
 
-	//Cuando no se sabe el tipo de valor, la buena práctica es intentar asignar el tipo de dato al que pertenece
-	fmt.Printf("%v por favor me da %v de cilantro\n", expresion, cantidad)
+	//For condicional (decremento)
+	for i := 10; i > 0; i-- {
+		fmt.Println(i)
 
-	//Sprintf va a generar un string pero no lo va a imprimir en consola pero lo va a guardar como un string
-	message := fmt.Sprintf("%v por favor me da %v de cilantro", expresion, cantidad)
-	fmt.Println(message)
+	}
 
-	//Tipo de datos
-	fmt.Printf("helloMessage: %T\n", helloMessage)
+	fmt.Println()
 
-	fmt.Printf("Cantidad: %T\n", cantidad)
+	//For Range: Cuando se tiene una colección de un objeto.
+	listaNumerosPares := []int{2, 4, 6, 8, 10, 12, 14, 16, 18, 20}
 
-	//Las anteriores son las funciones mas "importantes" o útiles del paquete fmt.
+	for i, par := range listaNumerosPares {
+		fmt.Printf("posición %d número par: %d \n", i, par)
 
+	}
+
+	//For forever
+	/*
+		counterForever := 0
+		for {
+			fmt.Println(counterForever)
+			counterForever++
+		}
+	*/
+	/*Nota: Tener en cuenta que en Golang solo existe unciclo iterativo que es "For"-
+	En otros lenguajes tienen otros ciclos como For, While, Do While, etc
+	Tener en cuenta que enc asod e utilizar el ciclo For forever, debe haber una manera que dentro del
+	bloque de código pueda salir del ciclo for, de lo contrario sera un gasto inoficioso de recursos y deberá
+	detenerse es ciclo de forma manual. */
 }
