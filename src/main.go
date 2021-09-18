@@ -1,58 +1,34 @@
 package main
 
-import (
-	"bufio"
-	"fmt"
-	"os"
-)
-
-func oddOrEvent(num int) string {
-	if num%2 == 0 {
-		return "El número es par"
-	}
-	return "El número es impar"
-}
-
-func validatepassword(pw string) {
-	pwTrue := "JoseNest0rPekerman"
-
-	if pw != pwTrue {
-		fmt.Println("Acceso denegado. Contraseña inválida")
-	} else {
-		fmt.Println("Acceso autorizado. Bienvenido")
-	}
-}
+import "fmt"
 
 func main() {
 
-	valor1 := 1
-	valor2 := 2
-
-	if valor1 == 1 {
-		fmt.Println("Es 1")
-	} else {
-		fmt.Println("No es 1")
+	modulo := 5 % 2
+	switch modulo {
+	case 0:
+		fmt.Println("Es par")
+	default:
+		fmt.Println("Es impar")
 	}
 
-	//With AND
-	if valor1 == 1 && valor2 == 3 {
-		fmt.Println(("Es verdad"))
+	//fmt.Println()
+
+	switch modulo2 := 4 % 2; modulo2 {
+	case 0:
+		fmt.Println("Es par")
+	default:
+		fmt.Println("Es impar")
 	}
 
-	//With OR
-	if valor1 == 0 || valor2 == 2 {
-		fmt.Println("Es verdad, OR")
+	//Switch sin ninguna condicion
+	value := 200
+	switch {
+	case value > 100:
+		fmt.Println("Es mayor a 100")
+	case value < 0:
+		fmt.Println("Es menor a 0")
+	default:
+		fmt.Println("No condición")
 	}
-
-	numeroPar := 8
-	numeroImpar := 33
-
-	fmt.Println(oddOrEvent(numeroPar))
-	fmt.Println(oddOrEvent(numeroImpar))
-
-	scanner := bufio.NewScanner(os.Stdin)
-	scanner.Scan()
-	password := scanner.Text()
-
-	validatepassword(password)
 }
