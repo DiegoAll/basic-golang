@@ -1,21 +1,16 @@
 package main
 
-import "fmt"
-
-type car struct {
-	brand string
-	year  int
-}
+import (
+	pk "basic-golang/src/mypackage"
+	"fmt"
+)
 
 func main() {
-	//Una forma de instanciar un struct
-	myCar := car{brand: "Ford", year: 2020}
+	var myCar pk.CarPublic
+	myCar.Brand = "Chevrolet"
+	myCar.Year = 2021
+
 	fmt.Println(myCar)
 
-	//Existe otra forma para instanciarlo como una clase vacia
-	var otherCar car
-	otherCar.brand = "Aston Martin"
-	otherCar.year = 2021
-	fmt.Println(otherCar)
-
+	pk.PrintMessage("Oelo")
 }
