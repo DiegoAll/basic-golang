@@ -1,41 +1,66 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
+
+func isPalindromo(text string) {
+	var textReverse string
+	for i := len(text) - 1; i >= 0; i-- {
+		textReverse += string(text[i]) // Se realiza una conversion a string ya que retorna un tipo de dato byte correspondiente al codigo ascii del caracter
+	}
+
+	if text == textReverse {
+		fmt.Println("Es palíndromo")
+	} else {
+		fmt.Println("No es palíndromo")
+	}
+}
+
+/*Ejemplos de palindromos
+-Anita lava la tina
+-Amor a Roma
+-Allí ves a Sevilla
+-Amigo no gima
+-Amad a la dama
+-Ella te da detalle
+-Anula la luna
+-Isaac no ronca asi
+-Ligar es ser agil
+-Luz azul
+-Oso baboso
+-Se van sus naves
+-Sometamos o matemos
+-Ojo rojo
+-Son mulas o civicos alumnos
+-Son robos o sobornos
+-Amor a roma
+*/
 
 func main() {
 
-	//Array [Son valores inmutables] No se puede agregar otro elemento pero si se pueden editar los valores
-	var array [4]int
-	fmt.Println(array)
+	slice := []string{"Que", "mas", "pues"}
 
-	array[0] = 1
-	array[1] = 2
-	fmt.Println(array)
-	fmt.Println("La longitud del array es:", len(array))
-	fmt.Println("La capacidad del array es:", cap(array))
+	for i, valor := range slice {
+		fmt.Println(i, valor)
+	}
 
-	//Slices Similares a los arrays, pero no se le indica el tamaño que va a tener.
-	slice := []int{0, 1, 2, 3, 4, 5, 6}
-	fmt.Println(slice)
-	fmt.Println("La longitud del slice es:", len(slice))
-	fmt.Println("La capacidad del slice es:", cap(slice))
+	fmt.Println()
 
-	//Slicing es lo que se utiliza al momento de manejar arrays,slices o listas para poder interactuar con cada uno de sus elementos.
-	//Métodos en el slice
-	fmt.Println(slice[0])
-	fmt.Println(slice[:3])  //El indice que va despupes de los 2 puntos es esclusivo
-	fmt.Println(slice[2:4]) //Lim inferior es inclusivo pero lim superior es esclusivo
-	fmt.Println(slice[4:])  //Primer indice es inclusivo
+	//Sino me interesa el indice, solamente el valor, lo escapamos.
+	for _, valor := range slice {
+		fmt.Println(valor)
+	}
+	palabra := "amigonogima"
+	isPalindromo(palabra)
 
-	//Adicionar elementos en los slices
-	slice = append(slice, 7)
-	fmt.Println(slice)
+	//Case insensitive
+	//Ama
+	var palabra2 string
+	fmt.Scan(&palabra2)
+	word := strings.ToLower(palabra2)
 
-	//Adicionar una lista en el slice
-	newSlice := []int{8, 9, 20}
-	slice = append(slice, newSlice...)
-	/*La extension agrega los ..., indica que se realiza la descompresión y en vez de agregar una nueva lista,
-	agrega cada uno de los elementos de forma independiente */
-	fmt.Println(slice)
+	isPalindromo(word)
 
 }
