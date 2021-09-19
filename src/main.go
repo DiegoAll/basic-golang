@@ -2,23 +2,20 @@ package main
 
 import "fmt"
 
+type car struct {
+	brand string
+	year  int
+}
+
 func main() {
-	m := make(map[string]int)
+	//Una forma de instanciar un struct
+	myCar := car{brand: "Ford", year: 2020}
+	fmt.Println(myCar)
 
-	m["Faustino"] = 45
-	m["Justino"] = 24
+	//Existe otra forma para instanciarlo como una clase vacia
+	var otherCar car
+	otherCar.brand = "Aston Martin"
+	otherCar.year = 2021
+	fmt.Println(otherCar)
 
-	fmt.Println(m)
-
-	//recorrer el map
-	/* Tener en cuenta que al realizar el recorrido con map se hace de forma aleatoria, no va a retornar la clave y valor en el mismo
-	orden en el cual fue ingresad, como sucede de forma concurrente va a ejecutarse de forma aleatoria, Si se requiere la información en el mismo orden se
-	recomiendan los slices */
-	for i, v := range m {
-		fmt.Println(i, v)
-	}
-
-	//Como obtener uno de los valores
-	value, ok := m["Justino"]
-	fmt.Println(value, ok)
 }
