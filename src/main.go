@@ -4,35 +4,38 @@ import "fmt"
 
 func main() {
 
-	//Defer va a ejecutar la última función antes de que todo termine, no se limita a un comando tambien puede especifricarse uan función
-	// En que casos usas defer? Ej. Alr ealizar una conexión a una BD, al final para que realice el cierre de la conexión.
-	//En teoria se puedne utilizar varios defer en una fucnión, ṕero la buena práctica indica que sedebe utilizar solo un defer por función.
+	//Array [Son valores inmutables] No se puede agregar otro elemento pero si se pueden editar los valores
+	var array [4]int
+	fmt.Println(array)
 
-	defer fmt.Println("Hablalo mostro")
-	fmt.Println("Buenas tardes estimado")
+	array[0] = 1
+	array[1] = 2
+	fmt.Println(array)
+	fmt.Println("La longitud del array es:", len(array))
+	fmt.Println("La capacidad del array es:", cap(array))
 
-	//continue y break
-	//continue se utilzia cuando se cumple una condición dada  dentro del ciclo for puede ser algo de intereres que continue en ejecución.
-	/*Por ejemplo que suceda un error controlado en el cual aunque suceda ese error, a pesar de que sucveda este error se parsea se ejecuta
-	otro bloque de código pero quiero que continue la ejecución del ciclo For*/
-	for i := 0; i < 10; i++ {
-		fmt.Println(i)
+	//Slices Similares a los arrays, pero no se le indica el tamaño que va a tener.
+	slice := []int{0, 1, 2, 3, 4, 5, 6}
+	fmt.Println(slice)
+	fmt.Println("La longitud del slice es:", len(slice))
+	fmt.Println("La capacidad del slice es:", cap(slice))
 
-		//Continue
-		if i == 2 {
-			fmt.Println("Es 2")
-			continue
-		}
+	//Slicing es lo que se utiliza al momento de manejar arrays,slices o listas para poder interactuar con cada uno de sus elementos.
+	//Métodos en el slice
+	fmt.Println(slice[0])
+	fmt.Println(slice[:3])  //El indice que va despupes de los 2 puntos es esclusivo
+	fmt.Println(slice[2:4]) //Lim inferior es inclusivo pero lim superior es esclusivo
+	fmt.Println(slice[4:])  //Primer indice es inclusivo
 
-		//Break
-		/* Se utiliza cuando sucede algo determinado una condición determinada y se espera que a pesar de esa condición no se desea que
-		el código se ejecute*/
+	//Adicionar elementos en los slices
+	slice = append(slice, 7)
+	fmt.Println(slice)
 
-		if i == 8 {
-			fmt.Println("Break")
-			break
-		}
-
-	}
+	//Adicionar una lista en el slice
+	newSlice := []int{8, 9, 20}
+	slice = append(slice, newSlice...)
+	/*La extension agrega los ..., indica que se realiza la descompresión y en vez de agregar una nueva lista,
+	agrega cada uno de los elementos de forma independiente */
+	fmt.Println(slice)
 
 }
