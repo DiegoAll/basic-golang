@@ -1,43 +1,28 @@
 package main
 
-import (
-	"fmt"
-	"sync"
-	"time"
-)
+import "fmt"
 
-/*func say(text string) {
-	fmt.Println(text)
-}*/
-
-func say(text string, wg *sync.WaitGroup) {
-
-	defer wg.Done()
-
-	fmt.Println(text)
+func say(text string, c chan<- string) {
+	c <- text
 }
 
 func main() {
-
-	/*Este paquete "sync" permite interactuar de forma primitiva con las Goroutines, lo cual lo hace mas eficiente
-	sin embargo implica un costo mas alto para ser mantenido
+	/*
+		Los channels te permiten compartir datos entre las goroutines ya que ello maneja de forma nativa la comunicación entre ellos
+		además de otros datos primitivos como por ejemplo los WaitGroups para manejar la concurrencia
 	*/
-	var wg sync.WaitGroup
 
-	fmt.Println("Que mas pues")
-	wg.Add(1)
-
-	go say("panita", &wg) //para empezar a manejar las goutines solo se utiliza el keyword "go"
-
-	wg.Wait()
-
-	/*Las Go routines se utilizan mucho con funciones anónimas
-	¿Qué es una funcion anonima?
-	Es una función que no es declarada anteriormente, sino que se realiza dentro de la misma función y tiene su vida en ella misma.
+	/*El segundo parámetro corresponde a la cantidad limite de goroutines que recibirá el channel, es buena practica especidifcarlo, en caso de que no se
+	especifique el va a tomar un valor dinamico en todo momento.
+	Así como esta solo va a recibir una goroutine de tipo string.
 	*/
-	go func(text string) {
-		fmt.Println(text)
-	}("Bye parcero")
 
-	time.Sleep(time.Second * 1)
+	c := make(chan string, 1)
+
+	fmt.Println("Hello")
+
+	go say("Bye", c)
+
+	fmt.Println(<-c)
+
 }
