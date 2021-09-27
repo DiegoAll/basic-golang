@@ -2,27 +2,46 @@ package main
 
 import "fmt"
 
-func say(text string, c chan<- string) {
+func message(text string, c chan string) {
 	c <- text
 }
 
 func main() {
-	/*
-		Los channels te permiten compartir datos entre las goroutines ya que ello maneja de forma nativa la comunicación entre ellos
-		además de otros datos primitivos como por ejemplo los WaitGroups para manejar la concurrencia
+
+	c := make(chan string, 2)
+
+	c <- "Message 1"
+	c <- "Message 2"
+
+	fmt.Println(len(c), cap(c))
+
+	//Range y close
+	/*Decirle al runtime de GO que va a cerrar el canal, eso quiere decir que ese canal no va a recibir otro dato adicional a pesar de que tenga
+	mas capacidad. Lo ideal es cerrar los canales una vez ya dejan de usarse.
 	*/
 
-	/*El segundo parámetro corresponde a la cantidad limite de goroutines que recibirá el channel, es buena practica especidifcarlo, en caso de que no se
-	especifique el va a tomar un valor dinamico en todo momento.
-	Así como esta solo va a recibir una goroutine de tipo string.
-	*/
+	//Range y close
+	close(c)
 
-	c := make(chan string, 1)
+	//c <- "Message 3"
 
-	fmt.Println("Hello")
+	for message := range c {
+		fmt.Println(message)
+	}
 
-	go say("Bye", c)
+	//Select
+	email1 := make(chan string)
+	email2 := make(chan string)
+	go message("message1", email1)
+	go message("message2", email2)
 
-	fmt.Println(<-c)
+	for i := 0; i < 2; i++ {
+		select {
+		case m1 := <-email1:
+			fmt.Println("Email recibido de email1", m1)
+		case m2 := <-email2:
+			fmt.Println("Email recibido de email2", m2)
+		}
+	}
 
 }
