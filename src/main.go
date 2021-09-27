@@ -1,50 +1,43 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"sync"
+	"time"
+)
 
-type figuras2D interface {
-	area() float64
-}
+/*func say(text string) {
+	fmt.Println(text)
+}*/
 
-type cuadrado struct {
-	base float64
-}
+func say(text string, wg *sync.WaitGroup) {
 
-type rectangulo struct {
-	base   float64
-	altura float64
-}
+	defer wg.Done()
 
-func (c cuadrado) area() float64 {
-	return c.base * c.base
-}
-
-func (r rectangulo) area() float64 {
-	return r.base * r.altura
-}
-
-func calcular(f figuras2D) {
-	fmt.Println("Area:", f.area())
+	fmt.Println(text)
 }
 
 func main() {
-	myCuadrado := cuadrado{base: 2}
-	myRectangulo := rectangulo{base: 2, altura: 4}
 
-	//Si no tuvieramops construía la interfaz para calcular el area sería de la siguiente forma:  myCuadrado.area() y myRectangulo.area()
+	/*Este paquete "sync" permite interactuar de forma primitiva con las Goroutines, lo cual lo hace mas eficiente
+	sin embargo implica un costo mas alto para ser mantenido
+	*/
+	var wg sync.WaitGroup
 
-	// Cuando se tienen varias estructuras de datos que comparten la misma función al implementar interfaces es mucho mas eficiente
-	//Pero como disponemos de la interface la utilizaremosd e la siguiente forma:
+	fmt.Println("Que mas pues")
+	wg.Add(1)
 
-	calcular(myCuadrado)
-	calcular(myRectangulo)
+	go say("panita", &wg) //para empezar a manejar las goutines solo se utiliza el keyword "go"
 
-	// Lista de interfaces
-	//En otros lenguajes se pueden tener listas con  elementos de diversos tipos de datos, en GO no se puede hacer
-	// Cuando se crea el tipo de dato sea slice o array se debe indicar el tipo de dato que se va a insertar allí
-	// hay una forma de simularlo y es:
+	wg.Wait()
 
-	//Un slice de interfaces
-	myInterface := []interface{}{"Hola", 12, 4.90}
-	fmt.Println(myInterface...)
+	/*Las Go routines se utilizan mucho con funciones anónimas
+	¿Qué es una funcion anonima?
+	Es una función que no es declarada anteriormente, sino que se realiza dentro de la misma función y tiene su vida en ella misma.
+	*/
+	go func(text string) {
+		fmt.Println(text)
+	}("Bye parcero")
+
+	time.Sleep(time.Second * 1)
 }
